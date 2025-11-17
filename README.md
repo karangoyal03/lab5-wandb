@@ -1,10 +1,8 @@
 # Lab 1 - XGBoost Model Training with Wandb
 
-This project refactors the original Jupyter notebook (`Lab1.ipynb`) into a modular Python package for training an XGBoost classifier on the Dermatology dataset with Wandb integration for experiment tracking.
-
 ## Project Structure
 
-```
+```text
 .
 ├── main.py              # Main entry point
 ├── config.py            # Configuration parameters
@@ -25,9 +23,6 @@ This project refactors the original Jupyter notebook (`Lab1.ipynb`) into a modul
 python -m venv .venv
 .\.venv\Scripts\Activate
 
-# Linux/macOS
-python3 -m venv .venv
-source .venv/bin/activate
 ```
 
 ### Step 2: Install Dependencies
@@ -47,6 +42,7 @@ python main.py
 ```
 
 This will:
+
 1. Login to Wandb (you'll be prompted for credentials)
 2. Initialize Wandb run with tags and notes
 3. Log system information (platform, Python version, CPU, memory)
@@ -71,17 +67,21 @@ All model and training parameters can be modified in `config.py`:
 ## Module Descriptions
 
 ### `main.py`
+
 Main entry point that orchestrates the entire training pipeline. Handles Wandb initialization, system info logging, dataset artifact logging, and cleanup.
 
 ### `config.py`
+
 Centralized configuration file containing all hyperparameters, dataset URLs, and project settings.
 
 ### `data_loader.py`
+
 - `download_dataset()`: Downloads the dataset from UCI if it doesn't exist locally
 - `load_data()`: Loads and preprocesses the data, splits into train/test sets, and creates XGBoost DMatrix objects
 - `log_dataset_statistics()`: Logs dataset statistics, class distributions, and sample data to Wandb
 
 ### `model_trainer.py`
+
 - `train_model()`: Trains the XGBoost model with Wandb logging
 - `evaluate_model()`: Comprehensive model evaluation with multiple metrics and visualizations
 - `log_feature_importance()`: Logs and visualizes top feature importances
@@ -96,28 +96,33 @@ The project uses the [Dermatology Dataset](https://archive.ics.uci.edu/ml/datase
 The project includes comprehensive Wandb integration for experiment tracking and visualization:
 
 ### Metrics & Logging
+
 - **Model Hyperparameters**: All model parameters logged to Wandb config
 - **Training Metrics**: Automatic logging via XGBoost callback (train/test loss per iteration)
 - **Evaluation Metrics**: Accuracy, Precision, Recall, F1-Score, and Error Rate
 - **Classification Report**: Per-class metrics logged as interactive table
 
 ### Visualizations
+
 - **Confusion Matrix**: Multi-class confusion matrix visualization
 - **Class Distribution**: Bar charts showing train/test class distributions
 - **Feature Importance**: Top 20 features visualized as bar chart
 - **Data Samples**: Sample training data logged as interactive table
 
 ### Artifacts
+
 - **Model Artifact**: Trained XGBoost model saved and logged as Wandb artifact
 - **Dataset Artifact**: Original dataset file logged as artifact for reproducibility
 
 ### System & Metadata
+
 - **System Information**: Platform, Python version, CPU count, memory usage
 - **Run Tags**: Automatic tagging (xgboost, dermatology, classification)
 - **Run Notes**: Descriptive notes for each run
 - **Alerts**: Training completion alerts
 
 ### Dataset Statistics
+
 - Dataset sizes (train/test/total)
 - Number of features and classes
 - Class distribution counts for train and test sets
@@ -143,4 +148,3 @@ Make sure you have a Wandb account and are logged in before running the script.
 - scikit-learn >= 1.3.0
 - matplotlib >= 3.7.0
 - psutil >= 5.9.0
-
